@@ -33,55 +33,38 @@ public class LogitecControl extends OpMode {
         //3 ****** 4
         //motor.setPower i-a valori intre -1 si 1 unde cea mai mare este -1 cea mai mare viteza pe care o poate atinge motorul cu spatele invers la 1
         //deci avem două controlăre: gamepad1 și gamepad2
-        if(gamepad1.left_stick_x>0.1)
-        {//robotul se mișcă spre dreapta
+        if(Math.abs(gamepad1.left_stick_x)>0.1)
+        {
+            //robotul se mișcă spre dreapta
             motor1.setPower(x);
             motor2.setPower(-x);
             motor3.setPower(-x);
             motor4.setPower(x);
-            telemetry.addData("Daca left stick x este pozitiv ", "robot merge in dreapta");
+            telemetry.addData("Daca este left stick x ", "robot merge stanga si dreapta");
         }
-        if(gamepad1.left_stick_x<-0.1)
-        {//robotul se mișcă spre stânga
-            motor1.setPower(-x);
-            motor2.setPower(x);
-            motor3.setPower(x);
-            motor4.setPower(-x);
-            telemetry.addData("Daca left stick x este negativ ", "robot merge in stanga");
-        }
-        if (gamepad1.left_stick_y>0.1)
+
+        if (Math.abs(gamepad1.left_stick_y)>0.1)
         {//robotul merge inainte
             motor1.setPower(y);
             motor2.setPower(y);
             motor3.setPower(y);
             motor4.setPower(y);
-            telemetry.addData("Daca left stick y este pozitiv ", "robot merge in fata");
+            telemetry.addData("Daca este left stick y ", "robot merge fata si spate");
         }
-        if (gamepad1.left_stick_y<-0.1)
-        {//robotul merge inapoi
-            motor1.setPower(-y);
-            motor2.setPower(-y);
-            motor3.setPower(-y);
-            motor4.setPower(-y);
-            telemetry.addData("Daca left stick y este negativ ", "robot merge in spate");
-        }
-        if (gamepad1.right_stick_x>0.1)
+
+        if (Math.abs(gamepad1.right_stick_x)>0.1)
         {//robotul se invarte pe loc spre dreapta
             motor1.setPower(i);
             motor2.setPower(-i);
             motor3.setPower(i);
             motor4.setPower(-i);
-            telemetry.addData("Daca right stick x este pozitiv ", "robot se invarte in dreapta");
+            telemetry.addData("Daca est right stick x ", "robot se invarte stanga si dreapta");
         }
-        if (gamepad1.right_stick_x<-0.1)
-        {//robotul se invarte spre stanga
-            motor1.setPower(-i);
-            motor2.setPower(i);
-            motor3.setPower(-i);
-            motor4.setPower(i);
-            telemetry.addData("Daca right stick x este pozitiv", "robot se invarte in stanga");
-        }
-        motor1 .setPower(0);
+
+        motor1.setPower(0);
+        motor2.setPower(0);
+        motor3.setPower(0);
+        motor4.setPower(0);
 
     }
 }
