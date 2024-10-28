@@ -7,17 +7,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name= "testing")
 public class testing extends OpMode {
-    DcMotor motor1, motor2;
+    DcMotor motor7, motor8;
     double ticks=288;
     double newtarget;
 
     @Override
     public void init() {
         telemetry.addData("Initialization: ", "started");
-        motor1 = hardwareMap.get(DcMotor.class , "motor1");
-        motor2 = hardwareMap.get(DcMotor.class , "motor2");
-        motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor7 = hardwareMap.get(DcMotor.class , "motor7");
+        motor8 = hardwareMap.get(DcMotor.class , "motor8");
+        motor7.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor8.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor7.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor8 .setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
     }
     @Override
@@ -28,38 +30,37 @@ public class testing extends OpMode {
         if(gamepad1.b){
             tracker();
         }
-        telemetry.addData("Motor ticks: ", motor1.getCurrentPosition());
-        telemetry.addData("Motor ticks: ", motor2.getCurrentPosition());
+        telemetry.addData("Motor ticks: ", motor7.getCurrentPosition());
+        telemetry.addData("Motor ticks: ", motor8.getCurrentPosition());
 
 
     }
 
     public void encoder(int turnage) {
-        motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor7.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor8.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         newtarget=ticks/turnage;
-        motor1.setTargetPosition((int)newtarget);
-        motor2.setTargetPosition((int)newtarget);
-        motor1.setPower(0.3);
-        motor2.setPower(0.3);
-        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while(motor1.isBusy() || motor2.isBusy());
+        motor7.setTargetPosition((int)newtarget);
+        motor8.setTargetPosition((int)newtarget);
+        motor7.setPower(-0.3);
+        motor8.setPower(-0.3);
+        motor7.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor8.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while(motor7.isBusy() || motor8.isBusy());
 
     }
 
     public void tracker(){
-        motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor1.setTargetPosition((int)newtarget);
-        motor2.setTargetPosition((int)newtarget);
-        motor1.setPower(-0.4);
-        motor2.setPower(-0.4);
-        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while(motor1.isBusy() || motor2.isBusy());
-        motor1.setPower(0);
-        motor2.setPower(0);
+        motor7.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor8.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor7.setTargetPosition((int)newtarget);
+        motor8.setTargetPosition((int)newtarget);
+        motor7.setPower(0.4);
+        motor8.setPower(0.4);
+        motor7.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor8.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while(motor7.isBusy() || motor8.isBusy());
+
 
     }
 
