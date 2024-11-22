@@ -77,12 +77,17 @@ public class  Ful extends OpMode {
         motor4.setPower(0);
 
         //codul de sus pentru roti
+
         //codul de jos pentru brat
 
         float Servo0y= gamepad2.left_stick_y;
         float Servo1x= gamepad2.right_stick_y;
         float Motor0ehx=gamepad2.left_stick_x;
         float Motor1ehx=gamepad2.right_stick_x;
+        float Servo3=gamepad2.left_trigger;
+        float Servo3a=gamepad2.right_trigger;
+        float Servo4=gamepad1.left_trigger;
+        float Servo4a=gamepad1.right_trigger;
         if(Math.abs(gamepad2.left_stick_y)>0.1) {
             servo0.setPower(gamepad2.left_stick_y);
         }
@@ -98,20 +103,19 @@ public class  Ful extends OpMode {
             motor1eh.setPower(gamepad2.right_stick_x);
             motor2eh.setPower(gamepad2.right_stick_x);
         }
-        while (gamepad2.x){
-            servo3.setPower(0.6);
+        while (Math.abs(gamepad2.left_trigger)>0.1){
+            servo3.setPower(gamepad2.left_trigger);
+        }
+        while(Math.abs(gamepad2.right_trigger)>0.1){
+            servo3.setPower(-gamepad2.right_trigger);
+        }
+        while (Math.abs(gamepad2.left_trigger)>0.1){
+            servo4.setPower(gamepad1.left_trigger);
+        }
+        while(Math.abs(gamepad2.right_trigger)>0.1){
+            servo4.setPower(-gamepad1.right_trigger);
         }
 
-        while (gamepad2.y){
-            servo4.setPower(0.6);
-        }
-        while (gamepad2.a){
-            servo3.setPower(-0.6);
-        }
-
-        while (gamepad2.b){
-            servo4.setPower(-0.6);
-        }
 
         motor2eh.setPower(0);
         motor1eh.setPower(0);
