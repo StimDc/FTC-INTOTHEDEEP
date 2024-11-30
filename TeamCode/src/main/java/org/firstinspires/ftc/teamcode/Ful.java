@@ -4,6 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
+
+import org.firstinspires.ftc.robotcore.internal.camera.delegating.DelegatingCaptureSequence;
+
 @TeleOp(name= "Codful")
 public class  Ful extends OpMode {
 
@@ -12,6 +15,7 @@ public class  Ful extends OpMode {
     DcMotor motor1,motor2,motor3,motor4 ;
     public CRServo servo0,servo1,servo2,servo3,servo4;
     public DcMotor motor0eh,motor1eh,motor2eh;
+
     @Override
     public void init() {
         motor0eh = hardwareMap.get(DcMotor.class, "motor0eh");
@@ -84,43 +88,41 @@ public class  Ful extends OpMode {
         float Servo1x= gamepad2.right_stick_y;
         float Motor0ehx=gamepad2.left_stick_x;
         float Motor1ehx=gamepad2.right_stick_x;
-        float Servo3=gamepad2.left_trigger;
+        float Servo3b=gamepad2.left_trigger;
         float Servo3a=gamepad2.right_trigger;
-        float Servo4=gamepad1.left_trigger;
+        float Servo4b=gamepad1.left_trigger;
         float Servo4a=gamepad1.right_trigger;
-        if(Math.abs(gamepad2.left_stick_y)>0.1) {
-            servo0.setPower(gamepad2.left_stick_y);
-        }
-        if (Math.abs(gamepad2.left_stick_x)>0.1){
-            motor0eh.setPower(gamepad2.left_stick_x);
-            telemetry.addData("Motorul:", "nebun");
+        boolean d=gamepad2.a;
+        boolean e=gamepad2.b;
+
+        if (Math.abs(gamepad2.left_stick_y)>0.1){
+            motor0eh.setPower(gamepad2.left_stick_y);
         }
         if(Math.abs(gamepad2.right_stick_y)>0.1){
-            servo1.setPower(gamepad2.right_stick_y);
-            servo2.setPower(gamepad2.right_stick_y);
+            motor1eh.setPower(gamepad2.right_stick_y);
+            motor2eh.setPower(gamepad2.right_stick_y);
         }
-        if(Math.abs(gamepad2.right_stick_x)>0.1){
-            motor1eh.setPower(gamepad2.right_stick_x);
-            motor2eh.setPower(gamepad2.right_stick_x);
-        }
-        while (Math.abs(gamepad2.left_trigger)>0.1){
-            servo3.setPower(gamepad2.left_trigger);
-        }
-        while(Math.abs(gamepad2.right_trigger)>0.1){
-            servo3.setPower(-gamepad2.right_trigger);
-        }
-        while (Math.abs(gamepad2.left_trigger)>0.1){
-            servo4.setPower(gamepad1.left_trigger);
-        }
-        while(Math.abs(gamepad2.right_trigger)>0.1){
-            servo4.setPower(-gamepad1.right_trigger);
-        }
+        if (gamepad2.a)
+            servo4.setPower(1);
+        else
+            servo4.setPower(0);
+        /*if (gamepad2.b)
+            servo4.setPower(-1);
+        else
+            servo4.setPower(0);*/
+        if (gamepad2.x)
+            servo3.setPower(1);
+        else
+            servo3.setPower(0);
+        if (gamepad2.y)
+            servo3.setPower(-1);
+        else
+            servo3.setPower(0);
 
 
         motor2eh.setPower(0);
         motor1eh.setPower(0);
         motor0eh.setPower(0);
-        servo4.setPower(0);
         servo3.setPower(0);
         servo2.setPower(0);
         servo1.setPower(0);
