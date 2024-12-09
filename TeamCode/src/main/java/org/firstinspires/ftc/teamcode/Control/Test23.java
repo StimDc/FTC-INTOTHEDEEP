@@ -1,11 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Control;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
-
-import org.firstinspires.ftc.robotcore.internal.camera.delegating.DelegatingCaptureSequence;
 
 @TeleOp(name= "Test23")
 public class  Test23 extends OpMode {

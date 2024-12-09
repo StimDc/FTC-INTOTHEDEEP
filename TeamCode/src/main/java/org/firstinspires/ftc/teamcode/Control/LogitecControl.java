@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Control;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name= "Test")
-public class  test extends OpMode {
+@TeleOp(name= "tutorial")
+public class  LogitecControl extends OpMode {
 
     //!!!trebuie tinut minte numele fiecarei componente
     //in functie de nume trebuie sa ii spunem codului ce este la fel ca mai jos
@@ -36,10 +36,30 @@ public class  test extends OpMode {
         if(Math.abs(gamepad1.left_stick_x)>0.1)
         {
             //robotul se mișcă spre dreapta si stanga
-            motor2.setPower(-x);
+            motor1.setPower(-x);
+            motor2.setPower(x);
+            motor3.setPower(-x);
+            motor4.setPower(x);
             telemetry.addData("Daca este left stick x ", "robot se misca spre stanga si dreapta");
         }
 
+        if (Math.abs(gamepad1.left_stick_y)>0.1)
+        {//robotul merge inainte si inapoi
+            motor1.setPower(-y);
+            motor2.setPower(-y);
+            motor3.setPower(y);
+            motor4.setPower(y);
+            telemetry.addData("Daca este left stick y ", "robot merge fata si spate");
+        }
+
+        if (Math.abs(gamepad1.right_stick_x)>0.1)
+        {//robotul se invarte pe loc spre dreapta
+            motor1.setPower(i);
+            motor2.setPower(i);
+            motor3.setPower(i);
+            motor4.setPower(i);
+            telemetry.addData("Daca este right stick x ", "robot se invarte stanga si dreapta");
+        }
 
         motor1.setPower(0);
         motor2.setPower(0);

@@ -1,17 +1,29 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Control;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.CRServo;
 
-@TeleOp(name= "tutorial")
-public class  LogitecControl extends OpMode {
+@TeleOp(name= "Codful")
+public class  Ful extends OpMode {
 
     //!!!trebuie tinut minte numele fiecarei componente
     //in functie de nume trebuie sa ii spunem codului ce este la fel ca mai jos
     DcMotor motor1,motor2,motor3,motor4 ;
+    public CRServo servo0,servo1,servo2,servo3,servo4;
+    public DcMotor motor0eh,motor1eh,motor2eh;
+
     @Override
     public void init() {
+        motor0eh = hardwareMap.get(DcMotor.class, "motor0eh");
+        motor1eh = hardwareMap.get(DcMotor.class, "motor1eh");
+        motor2eh = hardwareMap.get(DcMotor.class, "motor2eh");
+        servo0 = hardwareMap.get(CRServo.class , "Servo0");
+        servo1 = hardwareMap.get(CRServo.class , "Servo1");
+        servo2 = hardwareMap.get(CRServo.class , "Servo2");
+        servo3 = hardwareMap.get(CRServo.class, "Servo3");
+        servo4 = hardwareMap.get(CRServo.class, "Servo4");
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
         motor2 = hardwareMap.get(DcMotor.class,"motor2");
         motor3 = hardwareMap.get(DcMotor.class, "motor3");
@@ -65,6 +77,54 @@ public class  LogitecControl extends OpMode {
         motor2.setPower(0);
         motor3.setPower(0);
         motor4.setPower(0);
+
+        //codul de sus pentru roti
+
+        //codul de jos pentru brat
+
+        float Servo0y= gamepad2.left_stick_y;
+        float Servo1x= gamepad2.right_stick_y;
+        float Motor0ehx=gamepad2.left_stick_x;
+        float Motor1ehx=gamepad2.right_stick_x;
+        float Servo3b=gamepad2.left_trigger;
+        float Servo3a=gamepad2.right_trigger;
+        float Servo4b=gamepad1.left_trigger;
+        float Servo4a=gamepad1.right_trigger;
+        boolean d=gamepad2.a;
+        boolean e=gamepad2.b;
+
+        if (Math.abs(gamepad2.left_stick_y)>0.1){
+            motor0eh.setPower(gamepad2.left_stick_y);
+        }
+        if(Math.abs(gamepad2.right_stick_y)>0.1){
+            motor1eh.setPower(gamepad2.right_stick_y);
+            motor2eh.setPower(gamepad2.right_stick_y);
+        }
+        if (gamepad2.a)
+            servo4.setPower(1);
+        else
+            servo4.setPower(0);
+        /*if (gamepad2.b)
+            servo4.setPower(-1);
+        else
+            servo4.setPower(0);*/
+        if (gamepad2.x)
+            servo3.setPower(1);
+        else
+            servo3.setPower(0);
+        if (gamepad2.y)
+            servo3.setPower(-1);
+        else
+            servo3.setPower(0);
+
+
+        motor2eh.setPower(0);
+        motor1eh.setPower(0);
+        motor0eh.setPower(0);
+        servo3.setPower(0);
+        servo2.setPower(0);
+        servo1.setPower(0);
+        servo0.setPower(0);
 
     }
 }
