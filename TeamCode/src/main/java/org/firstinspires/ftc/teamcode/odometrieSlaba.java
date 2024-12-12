@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
+/*de ce*/
 @Autonomous(name = "Odometry Autonomous", group = "Linear Opmode")
 public class odometrieSlaba extends LinearOpMode {
 
