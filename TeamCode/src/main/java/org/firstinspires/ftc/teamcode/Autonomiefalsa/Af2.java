@@ -36,9 +36,8 @@ public class Af2 extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            if (gamepad1.a) {
                 pas1(a);
-            }
+
         }
     }
     public void pas1(double turnage){
