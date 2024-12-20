@@ -50,27 +50,31 @@ public class  Test23 extends OpMode {
             tracker1();
         }
         if(gamepad1.y){
-            encoder2(-2);
+            encoder2(-1.5);
         }
         if(gamepad1.x){
             tracker2();
         }
+        /*
+
+
         if (Math.abs(y)>0.1){
             motor0eh.setPower(y);
         }
         else
             motor0eh.setPower(0);
+        */
     }
 
     public void encoder1(double turnage){
         newTarget=ticks/turnage;
         motor0eh.setTargetPosition((int)newTarget);
-        motor0eh.setPower(0.6);
+        motor0eh.setPower(0.4);
         motor0eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public void tracker1(){
         motor0eh.setTargetPosition(0);
-        motor0eh.setPower(0.3);
+        motor0eh.setPower(0.4);
         motor0eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public void encoder2(double turnage){

@@ -13,6 +13,8 @@ public class  Ful extends OpMode {
     DcMotor motor1,motor2,motor3,motor4 ;
     public CRServo servo0,servo1,servo2,servo3,servo4;
     public DcMotor motor0eh,motor1eh,motor2eh;
+    double ticks=288.0;
+    double newTarget;
 
     @Override
     public void init() {
@@ -29,6 +31,9 @@ public class  Ful extends OpMode {
         motor3 = hardwareMap.get(DcMotor.class, "motor3");
         motor4 = hardwareMap.get(DcMotor.class,"motor4");
         telemetry.addData("Hardwere:", "pornire");
+        motor0eh.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor1eh.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor2eh.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
 
 
     }
@@ -44,7 +49,7 @@ public class  Ful extends OpMode {
         //**********
         //3 ****** 4
         //motor.setPower i-a valori intre -1 si 1 unde cea mai mare este -1 cea mai mare viteza pe care o poate atinge motorul cu spatele invers la 1
-        //deci avem două controlăre: gamepad1 și gamepad2
+        //deci avem două controllere: gamepad1 și gamepad2
         if(Math.abs(gamepad1.left_stick_x)>0.1)
         {
             //robotul se mișcă spre dreapta si stanga
@@ -93,38 +98,65 @@ public class  Ful extends OpMode {
         boolean d=gamepad2.a;
         boolean e=gamepad2.b;
 
-        if (Math.abs(gamepad2.left_stick_y)>0.1){
-            motor0eh.setPower(gamepad2.left_stick_y);
+        if (gamepad2.a){
+            encoder1(-3);
         }
-        if(Math.abs(gamepad2.right_stick_y)>0.1){
-            motor1eh.setPower(gamepad2.right_stick_y);
-            motor2eh.setPower(gamepad2.right_stick_y);
+        if (gamepad2.b){
+            tracker1();
         }
-        if (gamepad2.a)
+        if(gamepad2.y){
+            encoder2(-1.2 );
+        }
+        if(gamepad2.x){
+            tracker2();
+        }
+        if (gamepad1.a){
             servo4.setPower(1);
+        }
         else
             servo4.setPower(0);
-        /*if (gamepad2.b)
-            servo4.setPower(-1);
-        else
-            servo4.setPower(0);*/
-        if (gamepad2.x)
-            servo3.setPower(1);
-        else
-            servo3.setPower(0);
-        if (gamepad2.y)
-            servo3.setPower(-1);
-        else
-            servo3.setPower(0);
+        /*
 
 
-        motor2eh.setPower(0);
-        motor1eh.setPower(0);
-        motor0eh.setPower(0);
+        if (Math.abs(y)>0.1){
+            motor0eh.setPower(y);
+        }
+        else
+            motor0eh.setPower(0);*/
+
+
         servo3.setPower(0);
         servo2.setPower(0);
         servo1.setPower(0);
         servo0.setPower(0);
 
+    }
+    public void encoder1(double turnage){
+        newTarget=ticks/turnage;
+        motor0eh.setTargetPosition((int)newTarget);
+        motor0eh.setPower(0.4);
+        motor0eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+    public void tracker1(){
+        motor0eh.setTargetPosition(0);
+        motor0eh.setPower(0.4);
+        motor0eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+    public void encoder2(double turnage){
+        newTarget=ticks/turnage;
+        motor1eh.setTargetPosition((int)newTarget);
+        motor1eh.setPower(0.6);
+        motor1eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2eh.setTargetPosition((int)newTarget);
+        motor2eh.setPower(0.6);
+        motor2eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+    public void tracker2(){
+        motor1eh.setTargetPosition(0);
+        motor1eh.setPower(0.3);
+        motor1eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2eh.setTargetPosition(0);
+        motor2eh.setPower(0.3);
+        motor2eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }
