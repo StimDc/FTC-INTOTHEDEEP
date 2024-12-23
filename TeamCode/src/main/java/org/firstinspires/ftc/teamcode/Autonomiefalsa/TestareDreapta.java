@@ -6,15 +6,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="Testare stanga", group = "Robot")
-public class Testare  extends LinearOpMode {
+@Autonomous(name="Testare dreapta ", group = "Robot")
+public class TestareDreapta  extends LinearOpMode {
     DcMotor motor1, motor2, motor3, motor4;
     DcMotor motor0eh, motor1eh, motor2eh;
     CRServo servo4;
     static final double ticks = 288.0;
     double newTarget;
     private ElapsedTime runtime = new ElapsedTime();
-    double a = 0.38, b = 0.31, c = -3, d = 0.55, e = 0.8, f = -1.2, g = 0.8, h = 1.7;
+    double a = 0.38, b = 0.01, c = -3, d = 0.55, e = 0.8, f = -1.2, g = 0.8, h = 1.7;
 
     @Override
     public void runOpMode() {
@@ -38,18 +38,8 @@ public class Testare  extends LinearOpMode {
 
         if (opModeIsActive()) {
 
-                pas1(a); ///Merge inainte
-                pas2(b); ///Merge in stanga
-                /*pas3(c, 5);///Coboara ultima articulatie si aspira*/
-                pas32(c);///Ridica ultima articulatie
-                pas4(d);///Se invarte la dreapta
-                pas5(e);///Merge in spate
-                pas6(h);///Merge la dreapta
-                pas3(c, 0);///Coboara ultima articulatie
-                pas7(f);///Arunca bratul
-                telemetry.addData("Salut", "baieti");
-                pas8(g);///Merge in spate
-                pas9();
+            pas2(b); ///Merge in dreapta
+
 
         }
     }
@@ -85,16 +75,16 @@ public class Testare  extends LinearOpMode {
             motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             newTarget = ticks / turnage;
-            motor1.setTargetPosition((int) newTarget);
+            motor1.setTargetPosition((int) -newTarget);
             motor1.setPower(0.4);
             motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor2.setTargetPosition((int) -newTarget);
+            motor2.setTargetPosition((int) newTarget);
             motor2.setPower(0.4);
             motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor3.setTargetPosition((int) newTarget);
+            motor3.setTargetPosition((int) -newTarget);
             motor3.setPower(0.4);
             motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor4.setTargetPosition((int) -newTarget);
+            motor4.setTargetPosition((int) newTarget);
             motor4.setPower(0.4);
             motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             sleep(1000);
@@ -120,8 +110,8 @@ public class Testare  extends LinearOpMode {
             }
             servo4.setPower(0);
             sleep(1000);
-            }
         }
+    }
     public  void pas32(double turnage){
         newTarget=ticks/turnage;
         if (turnage != 0){
@@ -238,16 +228,16 @@ public class Testare  extends LinearOpMode {
     }
     public void pas9() {
 
-            motor1eh.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor2eh.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor1eh.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor2eh.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-            motor1eh.setTargetPosition(0);
-            motor1eh.setPower(0.4);
-            motor1eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor2eh.setTargetPosition(0);
-            motor2eh.setPower(0.4);
-            motor2eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            sleep(1000);
+        motor1eh.setTargetPosition(0);
+        motor1eh.setPower(0.4);
+        motor1eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2eh.setTargetPosition(0);
+        motor2eh.setPower(0.4);
+        motor2eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        sleep(1000);
 
     }
 }
