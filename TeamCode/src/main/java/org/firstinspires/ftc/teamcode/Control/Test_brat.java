@@ -33,11 +33,13 @@ public class Test_brat extends OpMode {
         double slider_pozitie_actuala = motorbrat2.getCurrentPosition();
         if (Math.abs(gamepad2.left_stick_x) > 0.1){
             if (pozitie_actuala_mb1/ticks_in_grade > limita1 || pozitie_actuala_mb1/ticks_in_grade < limita2 ) {
-                if (n == false) {
-                    n = true;
-                    ultima_pozitie = motorbrat1.getCurrentPosition();///intra in if doar la inceputul miscarii pentru a memora pozitia principala
+                if(brat_fix( slider_pozitie_actuala, ultima_pozitie, ultimul_unghi)>mb1) {
+                    if (n == false) {
+                        n = true;
+                        ultima_pozitie = motorbrat1.getCurrentPosition();///intra in if doar la inceputul miscarii pentru a memora pozitia principala
+                    }
+                    motorbrat1.setPower(mb1);///mb1 este valoarea joystick-ului
                 }
-                motorbrat1.setPower(mb1);///mb1 este valoarea joystick-ului
             }else{
                 motorbrat1.setPower(brat_fix( slider_pozitie_actuala, ultima_pozitie, ultimul_unghi));///tine bratul in pozitie ficsa
                 n = false;
