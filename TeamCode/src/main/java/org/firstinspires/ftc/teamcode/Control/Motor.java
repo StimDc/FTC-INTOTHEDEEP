@@ -9,44 +9,36 @@ import com.qualcomm.robotcore.hardware.CRServo;
 @TeleOp(name= "Saltare")
 public class Motor extends OpMode {
     public DcMotor motor7, motor8;
+    DcMotor motorbrat1,motorbrat2;
     public CRServo servo1, servo2,servo3;
  
     @Override
     public void init() {
-        telemetry.addData("Initialization: ", "started");
-        motor7 = hardwareMap.get(DcMotor.class , "motor7");
-        motor8 = hardwareMap.get(DcMotor.class , "motor8");
-        servo1 = hardwareMap.get(CRServo.class , "Servo1");
-        servo2 = hardwareMap.get(CRServo.class , "Servo2");
-        servo3 = hardwareMap.get(CRServo.class , "Servo3");
+        motorbrat1 = hardwareMap.get(DcMotor.class, "motorbrat1");
+        motorbrat2 = hardwareMap.get(DcMotor.class, "motorbrat2");
+        motorbrat1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorbrat2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     @Override
-    public void loop(){
-        float Servo1x= gamepad2.left_stick_x;
-        float Servo2x= gamepad2.right_stick_x;
-        float Servo3y= gamepad2.right_stick_y;
-        while(gamepad2.a){
-            motor7.setPower(0.8);
-            motor8.setPower(0.8);
+    public void loop() {
+        float Servo1x = gamepad2.left_stick_y;
+        float Servo2x = gamepad2.right_stick_x;
+        float Servo3y = gamepad2.right_stick_y;
+        if (Math.abs(gamepad2.left_stick_y)>0.1){
+            motorbrat1.setPower(Servo1x);
         }
-        while(gamepad2.b){
-            motor7.setPower(-0.8);
-            motor8.setPower(-0.8);
+        else{
+            motorbrat1.setPower(0);
         }
-        if (Math.abs(gamepad2.left_stick_x)>0.1){
-            servo1.setPower(Servo1x);
-        }
-        if (Math.abs(gamepad2.right_stick_x)>0.1){
-            servo2.setPower(Servo2x);
-        }
-        if (Math.abs(gamepad2.right_stick_y)>0.1){
-            servo3.setPower(Servo3y);
-        }
-        motor7.setPower(0);
-        motor8.setPower(0);
-        servo3.setPower(0);
-        servo2.setPower(0);
-        servo1.setPower(0);
-    }
 
+
+        if (Math.abs(gamepad2.right_stick_y)>0.1){
+            motorbrat2.setPower(Servo3y);
+        }else{
+            motorbrat2.setPower(0);
+        }
+
+
+
+    }
 }

@@ -134,7 +134,7 @@ public class  Ful extends OpMode {
     public void encoder1(double turnage){
         newTarget=ticks/turnage;
         motor0eh.setTargetPosition((int)newTarget);
-        motor0eh.setPower(0.4);
+        motor0eh.setPower(0.3);
         motor0eh.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public void tracker1(){
