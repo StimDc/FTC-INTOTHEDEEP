@@ -46,6 +46,7 @@ public class Test_brat extends OpMode {
             motorbrat1.setPower(brat_fix( slider_pozitie_actuala, ultima_pozitie, ultimul_unghi));///tine bratul in pozitie ficsa
             n = false;
         }
+
     }
 
     public double brat_fix( double slider_pozitie_actuala, double ultima_pozitie, double ultimul_unghi){
