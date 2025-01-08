@@ -1,29 +1,32 @@
 package org.firstinspires.ftc.teamcode.Control;
 
+
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.CRServo;
 
-@TeleOp(name= "Controlbun")
-public class Controlbun extends OpMode {
-    //!!!trebuie tinut minte numele fiecarei componente
-    //in functie de nume trebuie sa ii spunem codului ce este la fel ca mai jos
+
+@TeleOp(name= "Saltare")
+public class Codul_robotului extends OpMode {
+    public DcMotor motor7, motor8;
+    DcMotor motorbrat1,motorbrat2;
+    public CRServo servo1, servo2,servo3;
     DcMotor motor1,motor2,motor3,motor4 ;
-    public CRServo servo0,servo1,servo2,servo3,servo4;
+    public CRServo servo0;
     public DcMotor motor0eh,motor1eh,motor2eh;
     double ticks=288.0;
     double newTarget;
-
+ 
     @Override
     public void init() {
+        motorbrat1 = hardwareMap.get(DcMotor.class, "motorbrat1");
+        motorbrat2 = hardwareMap.get(DcMotor.class, "motorbrat2");
+        motorbrat1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorbrat2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         servo0 = hardwareMap.get(CRServo.class , "Servo0");
-        servo1 = hardwareMap.get(CRServo.class , "Servo1");
-        servo2 = hardwareMap.get(CRServo.class , "Servo2");
-        servo3 = hardwareMap.get(CRServo.class, "Servo3");
-        servo4 = hardwareMap.get(CRServo.class, "Servo4");
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
 
         motor1.setDirection(DcMotor.Direction.FORWARD);
@@ -35,12 +38,7 @@ public class Controlbun extends OpMode {
 
         motor4 = hardwareMap.get(DcMotor.class,"motor4");
         motor4.setDirection(DcMotor.Direction.REVERSE);
-
-
-
-
     }
-
     @Override
     public void loop() {
         float x=-gamepad1.left_stick_x;
@@ -48,6 +46,25 @@ public class Controlbun extends OpMode {
         float i=gamepad1.right_stick_x;
         float j=gamepad1.right_stick_y;
         merge(x,y,i);
+
+
+        float lx2 = gamepad2.left_stick_y;
+        float rx2 = gamepad2.right_stick_x;
+        float ry2 = gamepad2.right_stick_y;
+        if (Math.abs(gamepad2.left_stick_y)>0.1){
+            motorbrat1.setPower(0.4);
+        }
+        else{
+            motorbrat1.setPower(-0.009);
+            motorbrat1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
+
+        if (Math.abs(gamepad2.right_stick_y)>0.1){
+            motorbrat2.setPower(0.4);
+        }else{
+            motorbrat1.setPower(0.009);
+            motorbrat1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
     }
 
     public void merge (float x, float y, float z){
