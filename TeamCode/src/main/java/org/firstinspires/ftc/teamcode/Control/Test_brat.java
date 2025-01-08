@@ -15,6 +15,7 @@ public class Test_brat extends OpMode {
     double ultimul_unghi=48.5;
     double masa_slider=2;
     double ticks_in_centimetri=12/288;
+    boolean n = false;
 
     @Override
     public void init(){
@@ -27,13 +28,12 @@ public class Test_brat extends OpMode {
     @Override
     public void loop(){
         float mb1 = gamepad2.left_stick_x;
-        boolean n = false;
         float mb2 = gamepad2.right_stick_y;
         double pozitie_actuala_mb1 = motorbrat1.getCurrentPosition();
         double slider_pozitie_actuala = motorbrat2.getCurrentPosition();
         if (Math.abs(gamepad2.left_stick_x) > 0.1){
             if (pozitie_actuala_mb1/ticks_in_grade > limita1 || pozitie_actuala_mb1/ticks_in_grade < limita2 ) {
-                if(brat_fix( slider_pozitie_actuala, ultima_pozitie, ultimul_unghi)>mb1) {
+                if(brat_fix( slider_pozitie_actuala, ultima_pozitie)>mb1) {
                     if (n == false) {
                         n = true;
                         ultima_pozitie = motorbrat1.getCurrentPosition();///intra in if doar la inceputul miscarii pentru a memora pozitia principala
@@ -41,17 +41,17 @@ public class Test_brat extends OpMode {
                     motorbrat1.setPower(mb1);///mb1 este valoarea joystick-ului
                 }
             }else{
-                motorbrat1.setPower(brat_fix( slider_pozitie_actuala, ultima_pozitie, ultimul_unghi));///tine bratul in pozitie ficsa
+                motorbrat1.setPower(brat_fix( slider_pozitie_actuala, ultima_pozitie));///tine bratul in pozitie ficsa
                 n = false;
             }
         }else{
-            motorbrat1.setPower(brat_fix( slider_pozitie_actuala, ultima_pozitie, ultimul_unghi));///tine bratul in pozitie ficsa
+            motorbrat1.setPower(brat_fix( slider_pozitie_actuala, ultima_pozitie));///tine bratul in pozitie ficsa
             n = false;
         }
 
     }
 
-    public double brat_fix( double slider_pozitie_actuala, double ultima_pozitie, double ultimul_unghi){
+    public double brat_fix( double slider_pozitie_actuala, double ultima_pozitie){
         double pozitie_modificata = motorbrat1.getCurrentPosition();
         double slider_pozitie_actuala_cm  =slider_pozitie_actuala*ticks_in_centimetri;
         double cateta = Math.sin(a(pozitie_modificata, ultima_pozitie))*slider_pozitie_actuala_cm;
