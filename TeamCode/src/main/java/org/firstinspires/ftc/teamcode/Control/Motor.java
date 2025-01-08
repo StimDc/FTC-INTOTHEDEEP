@@ -35,7 +35,6 @@ public class Motor extends OpMode {
             motorbrat1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
-
         if (Math.abs(gamepad2.right_stick_y)>0.1){
             motorbrat2.setPower(Servo3y);
         }else{
