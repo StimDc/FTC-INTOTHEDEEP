@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 @TeleOp(name= "Saltare")
@@ -14,7 +15,7 @@ public class Codul_robotului extends OpMode {
     DcMotor motorbrat1,motorbrat2;
     public CRServo servo1, servo2,servo3;
     DcMotor motor1,motor2,motor3,motor4 ;
-    public CRServo servo0;
+    public Servo servo0;
     public DcMotor motor0eh,motor1eh,motor2eh;
     double ticks=288.0;
     double newTarget;
@@ -26,7 +27,7 @@ public class Codul_robotului extends OpMode {
         motorbrat1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorbrat2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        servo0 = hardwareMap.get(CRServo.class , "Servo0");
+        servo0 = hardwareMap.get(Servo.class , "Servo0");
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
 
         motor1.setDirection(DcMotor.Direction.FORWARD);
@@ -52,19 +53,35 @@ public class Codul_robotului extends OpMode {
         float rx2 = gamepad2.right_stick_x;
         float ry2 = gamepad2.right_stick_y;
         if (Math.abs(gamepad2.left_stick_y)>0.1){
-            motorbrat1.setPower(0.4);
+            if (gamepad2.left_stick_y>0.1) {
+                motorbrat1.setPower(0.4);
+            }else{
+                motorbrat1.setPower(-0.4);
+            }
+
         }
         else{
-            motorbrat1.setPower(-0.009);
+            motorbrat1.setPower(-0.005);
             motorbrat1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
         if (Math.abs(gamepad2.right_stick_y)>0.1){
-            motorbrat2.setPower(0.4);
+            if(gamepad2.right_stick_y>0.1) {
+                motorbrat2.setPower(0.4);
+            }else{
+                motorbrat2.setPower(-0.4);
+            }
         }else{
-            motorbrat1.setPower(0.009);
-            motorbrat1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motorbrat2.setPower(0);
+            motorbrat2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
+        if (gamepad2.a) {
+            servo0.setPosition(0.35);
+        }
+        if (gamepad2.b){
+            servo0.setPosition(0);
+        }
+
     }
 
     public void merge (float x, float y, float z){
