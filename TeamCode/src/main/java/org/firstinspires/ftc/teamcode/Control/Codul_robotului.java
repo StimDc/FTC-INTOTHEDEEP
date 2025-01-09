@@ -82,6 +82,7 @@ public class Codul_robotului extends OpMode {
             servo0.setPosition(0);
         }
 
+
     }
 
     public void merge (float x, float y, float z){
