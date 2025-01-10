@@ -61,13 +61,13 @@ public class Codul_robotului extends OpMode {
 
         }
         else{
-            motorbrat1.setPower(-0.005);
+            motorbrat1.setPower(-0.003);
             motorbrat1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
         if (Math.abs(gamepad2.right_stick_y)>0.1){
             if(gamepad2.right_stick_y>0.1) {
-                motorbrat2.setPower(0.4);
+                motorbrat2.setPower(0.3);
             }else{
                 motorbrat2.setPower(-0.4);
             }
