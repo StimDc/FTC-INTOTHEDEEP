@@ -16,7 +16,7 @@ public class Autonomie_stanga extends LinearOpMode {
     static final double ticks = 288.0;
     double newTarget;
     private ElapsedTime runtime = new ElapsedTime();
-    double a=0.2, b=0.31, c=0.33, d=0.9, e=5, f=1.8, g=0.65, h=0.5, j=0.28, k=0.2, l=0.1;
+    double a=0.2, b=0.31, c=0.33, d=0.9, e=5, f=1.8, g=1, j=0.28, k=0.3, l=0.18, m=0.3;
     @Override
     public void runOpMode(){
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
@@ -38,19 +38,21 @@ public class Autonomie_stanga extends LinearOpMode {
         waitForStart();
 
         if (opModeIsActive()){
-                pas0(a);
-                pas1(b);
-                pas2(c);
-                pas1(d);
-                pas3(e);
-                pas5(f);
-                pas4();
-                pas6(g);
-                pas0(h);
-                pas7(j);
-                pas8(k);
-                pas9(l);
-
+                pas0(a); ///Ridica brat
+                pas1(b); ///Merge inainte
+                pas2(c); ///Merge la dreapta
+                pas1(d); ///Merge oleaca inainte
+                pas3(e); ///Coboara brat
+                pas5(f); ///Merge oleaca in spate
+                pas4();  ///Deschide gheara
+                pas5(f); ///Merge oleaca in spate
+                pas0(a); ///Ridica brat
+                pas6(g); ///Merge in spate
+                pas7(j); ///Se invarte la dreapta 90 grade
+                pas8(k); ///Merge in spate
+                pas9(l); ///Merge la stanga
+                pas1(m); ///Merge in fata
+                /*pas3(n); ///Coboara brat */
         }
     }
     public void pas0(double turnage) {
@@ -144,7 +146,7 @@ public class Autonomie_stanga extends LinearOpMode {
             motor4.setTargetPosition((int) newTarget);
             motor4.setPower(0.4);
             motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            sleep(1000);
+            sleep(2000);
         }
     }
 
