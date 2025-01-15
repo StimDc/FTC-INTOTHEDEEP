@@ -30,6 +30,7 @@ public class Testare_ultima extends OpMode {
     double nimic=0;
 
 
+
     double unghi_incepere = 48.5;///trebuie data valoare manual
     double limita1 = 49,limita2 = 141;///trebuie data valoare manual/ vezi unde sta bratul fara sa cada si masoara unghiul
     double ticks_in_grade = 288/(360*0.25);///vezi gear ration dinti_roata1/dinti_roata2 complicat
