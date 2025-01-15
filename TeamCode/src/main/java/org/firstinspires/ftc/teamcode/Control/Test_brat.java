@@ -29,10 +29,10 @@ public class Test_brat extends OpMode {
     public void loop(){
         float mb1 = gamepad2.left_stick_x;
         float mb2 = gamepad2.right_stick_y;
-        double pozitie_actuala_mb1 = motorbrat1.getCurrentPosition();
+        double pozitie_actala_mb1 = motorbrat1.getCurrentPosition();
         double slider_pozitie_actuala = motorbrat2.getCurrentPosition();
         if (Math.abs(gamepad2.left_stick_x) > 0.1){
-            if (pozitie_actuala_mb1/ticks_in_grade > limita1 || pozitie_actuala_mb1/ticks_in_grade < limita2 ) {
+            if (pozitie_actala_mb1/ticks_in_grade > limita1 || pozitie_actala_mb1/ticks_in_grade < limita2 ) {
                 if(brat_fix( slider_pozitie_actuala, ultima_pozitie)>mb1) {
                     if (n == false) {
                         n = true;
