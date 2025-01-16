@@ -159,7 +159,7 @@ public class Autonomie_High_Basket extends LinearOpMode {
 
     public void pas4(){
        servo0.setPosition(0.6);
-       servo1.setPosition(0.25);
+       servo1.setPosition(0.2);
        sleep(2000);
     }
 

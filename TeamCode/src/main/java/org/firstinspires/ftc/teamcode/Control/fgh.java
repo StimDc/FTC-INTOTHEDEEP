@@ -32,8 +32,10 @@ public class fgh extends OpMode {
     @Override
     public void init() {
         motorbrat1 = hardwareMap.get(DcMotor.class, "motorbrat1");
-        motorbrat2 = hardwareMap.get(DcMotor.class, "motorbrat2");
+        motorbrat1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorbrat1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorbrat2 = hardwareMap.get(DcMotor.class, "motorbrat2");
+        motorbrat2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorbrat2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
@@ -110,11 +112,11 @@ public class fgh extends OpMode {
 
         if (gamepad2.a) {
             servo0.setPosition(0.40);
-            servo1.setPosition(0.45);
+            servo1.setPosition(0.40);
         }
         if (gamepad2.b) {
             servo0.setPosition(0.6);
-            servo1.setPosition(0.25);
+            servo1.setPosition(0.2);
         }
 
         if(nimic!=0) {
