@@ -16,7 +16,7 @@ public class Autonomie_High_Basket extends LinearOpMode {
     static final double ticks = 288.0;
     double newTarget;
     private ElapsedTime runtime = new ElapsedTime();
-    double a=0.17, b=0.35, c=0.18, f=0.65 ,d=0.5, e=0.238, g=0.15, j=0.24, k=0.1, l=0.83333, m=0.265, n=0.33, o=0.4;
+    double a=0.17, b=0.33, c=0.16, f=0.65 ,d=0.5, e=0.238, g=0.165, j=0.22, k=0.1, l=0.83333, m=0.28, n=0.33, o=0.4;
     @Override
     public void runOpMode() {
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
@@ -158,8 +158,8 @@ public class Autonomie_High_Basket extends LinearOpMode {
     }
 
     public void pas4(){
-       servo0.setPosition(0.6);
-       servo1.setPosition(0.2);
+       servo0.setPosition(0.55);
+       servo1.setPosition(0.55);
        sleep(2000);
     }
 

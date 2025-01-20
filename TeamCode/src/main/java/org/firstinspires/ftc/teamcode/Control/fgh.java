@@ -102,6 +102,7 @@ public class fgh extends OpMode {
                     pozitie_actuala_mb2 = motorbrat2.getCurrentPosition();
                 } else{
                 motorbrat2.setPower(0);
+                motorbrat2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             }
 
 

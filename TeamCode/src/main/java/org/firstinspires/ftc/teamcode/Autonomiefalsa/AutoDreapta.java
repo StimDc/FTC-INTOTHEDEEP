@@ -61,8 +61,8 @@ public class AutoDreapta extends LinearOpMode {
         }
     }
     public void inceput(){
-        servo0.setPosition(0.4);
-        servo1.setPosition(0.4);
+        servo0.setPosition(0.35);
+        servo1.setPosition(0.80);
         sleep(1000);
     }
     public void pas0(double turnage) {
@@ -141,8 +141,8 @@ public class AutoDreapta extends LinearOpMode {
     }
 
     public void pas4(){
-        servo0.setPosition(0.6);
-        servo1.setPosition(0.2);
+        servo0.setPosition(0.55);
+        servo1.setPosition(0.55);
         sleep(1000);
     }
 
