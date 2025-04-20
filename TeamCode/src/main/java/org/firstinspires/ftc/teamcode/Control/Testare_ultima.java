@@ -46,8 +46,11 @@ public class Testare_ultima extends OpMode {
     public void init() {
         motorbrat1 = hardwareMap.get(DcMotor.class, "motorbrat1");
         motorbrat2 = hardwareMap.get(DcMotor.class, "motorbrat2");
+        motorbrat1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorbrat1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorbrat2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorbrat2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
 
         servo0 = hardwareMap.get(Servo.class, "Servo0");
@@ -104,7 +107,7 @@ public class Testare_ultima extends OpMode {
                     motorbrat2.setPower(ry2);
                 }
                 pozitie_actuala_mb2 = motorbrat2.getCurrentPosition();
-            } else if( pozitie_actuala_mb2>-1600 || pozitie_actuala_mb1<0 ) {
+            } else if( pozitie_actuala_mb2>-1400 || pozitie_actuala_mb1<   -1600 ) {
                 if (ry2<-0.3) {
                     motorbrat2.setPower(-0.3);
                 }else{
