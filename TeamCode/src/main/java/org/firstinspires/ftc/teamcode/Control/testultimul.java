@@ -12,8 +12,8 @@ import org.opencv.videoio.VideoCapture;
 import java.util.ArrayList;
 import java.util.List;
 
-@TeleOp(name= "arat   ")
-public class fgh extends OpMode {
+@TeleOp(name= "ultim23")
+public class testultimul extends OpMode {
 
 
     public DcMotor motor7, motor8;
@@ -24,6 +24,7 @@ public class fgh extends OpMode {
     public DcMotor motor0eh, motor1eh, motor2eh;
     double ticks = 288.0;
     double newTarget;
+    int reset=0;
 
     private VideoCapture camera;
     private Mat frame;
@@ -32,11 +33,14 @@ public class fgh extends OpMode {
     @Override
     public void init() {
         motorbrat1 = hardwareMap.get(DcMotor.class, "motorbrat1");
+        motorbrat2 = hardwareMap.get(DcMotor.class, "motorbrat2");
+
         motorbrat1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorbrat1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorbrat2 = hardwareMap.get(DcMotor.class, "motorbrat2");
         motorbrat2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorbrat2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
 
 
         servo0 = hardwareMap.get(Servo.class, "Servo0");
@@ -68,7 +72,16 @@ public class fgh extends OpMode {
         double pozitie_actuala_mb1 = motorbrat1.getCurrentPosition();
         telemetry.addData("Brat1  ", pozitie_actuala_mb1);
 
+        if (gamepad2.x){
+            if (reset==0){
+                reset=1;
+                motorbrat1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                motorbrat1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                motorbrat2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                motorbrat2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            }
 
+        }
         // Actualizarea controlului robotului
         float x = -gamepad1.left_stick_x;
         float y = -gamepad1.left_stick_y;
@@ -99,8 +112,8 @@ public class fgh extends OpMode {
                 }else{
                     motorbrat2.setPower(ry2);
                 }
-                    pozitie_actuala_mb2 = motorbrat2.getCurrentPosition();
-                } else{
+                pozitie_actuala_mb2 = motorbrat2.getCurrentPosition();
+            } else{
                 motorbrat2.setPower(0);
                 motorbrat2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             }
@@ -112,12 +125,12 @@ public class fgh extends OpMode {
         }
 
         if (gamepad2.a) {
-            servo0.setPosition(0.40);
-            servo1.setPosition(0.40);
+            servo0.setPosition(0.35);
+            servo1.setPosition(0.80);
         }
         if (gamepad2.b) {
-            servo0.setPosition(0.6);
-            servo1.setPosition(0.2);
+            servo0.setPosition(0.55);
+            servo1.setPosition(0.55);
         }
 
         if(nimic!=0) {

@@ -8,17 +8,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="Autonomie_stanga")
-public class Autonomie_stanga extends LinearOpMode {
+@Autonomous(name="Autonomie_High_Basket")
+public class Autonomie_High_Basket extends LinearOpMode {
     DcMotor motorbrat1,motorbrat2;
     DcMotor motor1,motor2,motor3,motor4 ;
-    public Servo servo0;
+    public Servo servo0, servo1;
     static final double ticks = 288.0;
     double newTarget;
     private ElapsedTime runtime = new ElapsedTime();
-    double a=0.19, b=0.31, c=0.33, d=0.9, e=4, f=1.7, g=1, j=0.28, k=0.1, l=0.25, m=0.25, n=3;
+    double a=0.17, b=0.33, c=0.16, f=0.65 ,d=0.5, e=0.238, g=0.165, j=0.22, k=0.1, l=0.83333, m=0.28, n=0.33, o=0.4;
     @Override
-    public void runOpMode(){
+    public void runOpMode() {
         motor1 = hardwareMap.get(DcMotor.class, "motor1");
         motor2 = hardwareMap.get(DcMotor.class, "motor2");
         motor3 = hardwareMap.get(DcMotor.class, "motor3");
@@ -26,6 +26,7 @@ public class Autonomie_stanga extends LinearOpMode {
         motorbrat1 = hardwareMap.get(DcMotor.class, "motorbrat1");
         motorbrat2 = hardwareMap.get(DcMotor.class, "motorbrat2");
         servo0 = hardwareMap.get(Servo.class, "Servo0");
+        servo1 = hardwareMap.get(Servo.class,"Servo1");
         motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor3.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -37,23 +38,24 @@ public class Autonomie_stanga extends LinearOpMode {
 
         waitForStart();
 
-        if (opModeIsActive()){
-                pas0(a); ///Ridica brat
-                pas1(b); ///Merge inainte
-                pas2(c); ///Merge la dreapta
-                pas1(d); ///Merge oleaca inainte
-                pas3(e); ///Coboara brat
-                pas5(f); ///Merge oleaca in spate
-                pas4();  ///Deschide gheara
-                pas5(f); ///Merge oleaca in spate
-                pas0(a); ///Ridica brat
-                pas6(g); ///Merge in spate
-                pas7(j); ///Se invarte la dreapta 90 grade
-                pas8(k); ///Merge in spate
-                pas9(l); ///Merge la stanga
-                pas9(l); ///Merge la stanga
-                pas1(m); ///Merge in fata
-                pas3(n); ///Coboara brat
+        if (opModeIsActive()) {
+            pas0(a);  ///Ridica brat
+            pas1_5(d);///Merge in dreapta
+            pas1(b);  ///Merge inainte
+            pas2(c);  ///Extinde slider
+            pas3(f);  ///Se invarte la stanga 38 grade
+            pas3_5(g);///Coboara brat
+            pas4();   ///Deschide gheara
+            pas0(g);  ///Ridica brat
+            pas5(c);  ///Revine slider
+            pas6(e);  ///Se invarte la dreapta 105 grade
+            pas1_5(k);///Merge in dreapta
+            pas6(l);  ///Se invarte la dreapta 30 grade
+            pas1(j);  ///Merge inainte
+            pas6(m);  ///Se invarte 90 grade
+            pas1(n);  ///Merge inainte
+            pas2(o);  ///Extinde slider
+            pas3_5(g);///Coboara brat
         }
     }
     public void pas0(double turnage) {
@@ -62,7 +64,7 @@ public class Autonomie_stanga extends LinearOpMode {
             motorbrat1.setTargetPosition((int)-newTarget);
             motorbrat1.setPower(0.6);
             motorbrat1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            sleep(2000);
+            sleep(1000);
         }
     }
 
@@ -86,10 +88,11 @@ public class Autonomie_stanga extends LinearOpMode {
             motor4.setTargetPosition((int) -newTarget);
             motor4.setPower(0.4);
             motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            sleep(1000);
+            sleep(1500);
         }
     }
-    public void pas2(double turnage) {
+
+    public void pas1_5(double turnage) {
         if (turnage != 0) {
             motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -112,70 +115,65 @@ public class Autonomie_stanga extends LinearOpMode {
         }
     }
 
+    public void pas2(double turnage){
+        if(turnage !=0){
+            newTarget = ticks / turnage;
+            motorbrat2.setTargetPosition((int)-newTarget);
+            motorbrat2.setPower(0.6);
+            motorbrat2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            sleep(1000);
+        }
+    }
     public void pas3(double turnage) {
         if (turnage != 0) {
+            motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             newTarget = ticks / turnage;
-            motorbrat1.setTargetPosition((int)newTarget);
-            motorbrat1.setPower(0.2);
+            motor1.setTargetPosition((int) -newTarget);
+            motor1.setPower(0.4);
+            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor2.setTargetPosition((int) -newTarget);
+            motor2.setPower(0.4);
+            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor3.setTargetPosition((int) -newTarget);
+            motor3.setPower(-0.4);
+            motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor4.setTargetPosition((int) -newTarget);
+            motor4.setPower(-0.4);
+            motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            sleep(1000);
+        }
+    }
+
+    public void pas3_5(double turnage){
+        if (turnage != 0) {
+            newTarget = ticks / turnage;
+            motorbrat1.setTargetPosition((int) newTarget);
+            motorbrat1.setPower(0.1);
             motorbrat1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             sleep(1000);
         }
     }
 
     public void pas4(){
-        servo0.setPosition(0);
-        sleep(2000);
+       servo0.setPosition(0.55);
+       servo1.setPosition(0.55);
+       sleep(2000);
     }
 
-    public void pas5(double turnage) {
-        if (turnage != 0) {
-            motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    public void pas5(double turnage){
+        if(turnage !=0){
             newTarget = ticks / turnage;
-
-            motor1.setTargetPosition((int) -newTarget);
-            motor1.setPower(0.4);
-            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor2.setTargetPosition((int) -newTarget);
-            motor2.setPower(0.4);
-            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor3.setTargetPosition((int) newTarget);
-            motor3.setPower(0.4);
-            motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor4.setTargetPosition((int) newTarget);
-            motor4.setPower(0.4);
-            motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            sleep(2000);
-        }
-    }
-
-
-    public void pas6(double turnage) {
-        if (turnage != 0) {
-            motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            newTarget = ticks / turnage;
-            motor1.setTargetPosition((int) -newTarget);
-            motor1.setPower(0.4);
-            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor2.setTargetPosition((int) -newTarget);
-            motor2.setPower(0.4);
-            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor3.setTargetPosition((int) newTarget);
-            motor3.setPower(0.4);
-            motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor4.setTargetPosition((int) newTarget);
-            motor4.setPower(0.4);
-            motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motorbrat2.setTargetPosition((int)newTarget);
+            motorbrat2.setPower(0.6);
+            motorbrat2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             sleep(1000);
         }
     }
 
-    public void pas7(double turnage) {
+    public void pas6(double turnage) {
         if (turnage != 0) {
             motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -194,52 +192,11 @@ public class Autonomie_stanga extends LinearOpMode {
             motor4.setTargetPosition((int) newTarget);
             motor4.setPower(-0.4);
             motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            sleep(1000);
+            sleep(1500);
         }
     }
-    public void pas8(double turnage) {
-        if (turnage != 0) {
-            motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            newTarget = ticks / turnage;
 
-            motor1.setTargetPosition((int) -newTarget);
-            motor1.setPower(0.4);
-            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor2.setTargetPosition((int) -newTarget);
-            motor2.setPower(0.4);
-            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor3.setTargetPosition((int) newTarget);
-            motor3.setPower(0.4);
-            motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor4.setTargetPosition((int) newTarget);
-            motor4.setPower(0.4);
-            motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            sleep(1000);
-        }
-    }
-    public void pas9(double turnage) {
-        if (turnage != 0) {
-            motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            newTarget = ticks / turnage;
-            motor1.setTargetPosition((int) newTarget);
-            motor1.setPower(0.4);
-            motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor2.setTargetPosition((int) -newTarget);
-            motor2.setPower(0.4);
-            motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor3.setTargetPosition((int) newTarget);
-            motor3.setPower(0.4);
-            motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            motor4.setTargetPosition((int) -newTarget);
-            motor4.setPower(0.4);
-            motor4.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            sleep(1000);
-        }
-    }
+
 }
+
+
